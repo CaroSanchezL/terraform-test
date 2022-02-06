@@ -29,14 +29,10 @@ subnets = [
         }
     ]
 
+pub_a_subnet_id = ((var.subnets[index(var.subnets.*.tag, "us-east-2a")].id
 
-#  "vpc_id" {
-#     default = "aws_vpc.${var.vpc_name}.id"
-# }
 
-# subnet_cidr_block = { for x in ["10.0.1.0/25", "10.0.1.128/25", "10.1.0.0/25", "10.1.0.128/25"] : "cidr_block" => x }
-
-# subnet_availability_zone = ["us-east-1a", "us-east-1b"]
+#------------------------------------INTERNET GATEWAY-------------------------------·#
 
 # #----------------------------------ALB---------------------------------------------#
 

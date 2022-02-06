@@ -10,17 +10,28 @@ variable "cidr_block" {}
 variable "subnets" {
 }
 
-#  "vpc_id" {
-#     default = "aws_vpc.${var.vpc_name}.id"
-# }
-
-variable "subnet_cidr_block" {
-    default = ["10.0.0.0/24"]
-}
-
-variable "subnet_availability_zone" {
+variable "pub_a_subnets_id" {
 
 }
+
+#------------------------------------INTERNET GATEWAY-------------------------------·#
+
+variable "igw_name" {
+    default = "team-4-cs-igw"
+}
+
+#------------------------------------ROUTE TABLES------------------------------------#
+
+variable "rt_name" {
+  
+}
+
+variable "rt_cidr_block" {
+    default = "0.0.0.0/0"
+}
+
+#------------------------------------NAT GATEWAY-------------------------------·#
+
 
 
 # variable "alb_security_groups" {
