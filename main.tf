@@ -53,17 +53,37 @@ resource "aws_route_table" "Public-Subnet-RT" {
 
 #------------------------------ROUTE TABLE ASSOCIATION-----------------------------------#
 
-resource "aws_route_table_association" "RT-IG-Association" {
+resource "aws_route_table_association" "rt_ig_association" {
+ for_each = { for k, v in aws_subnet.subnet:
+               k => v if length(regexall(".*-pub-", v.tags["Name"])) > 0 }
 
-count = 2
-
-  subnet_id = count.index == 0 : aws_subnet.subnets[0].id
-  
-
-  #como asociar dos subnets en un list(map)
-
-#  Route Table ID
+  subnet_id = aws_subnet.subnet[each.key].id
   route_table_id = aws_route_table.Public-Subnet-RT.id
 }
 
-# como crear y alocar (?) un Elastic IP a una NAT
+#--------------------------------EIP--------------------------------------#
+
+resource "aws_eip" "Nat-Gateway-EIP" {
+  count = 2
+  vpc = true
+
+  tags = {
+    Name = count.index == 1 ? "nat1" : "nat2"
+  }
+}
+
+# aws_eip.Nat-Gateway-EIP[0]
+
+resource "aws_nat_gateway" "NAT_GATEWAY" {
+  
+  for_each = { for k, v in aws_subnet.subnet: 
+               k => v if length(regexall(".*-pub-", v.tags["Name"])) > 0 }
+
+  #allocation_id =
+
+  subnet_id = aws_subnet.subnet[each.key].id 
+
+  tags = {
+    Name = "Nat-Gateway"
+  }
+}

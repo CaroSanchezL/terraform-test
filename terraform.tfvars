@@ -29,7 +29,7 @@ subnets = [
         }
     ]
 
-pub_a_subnet_id = ((var.subnets[index(var.subnets.*.tag, "us-east-2a")].id
+
 
 
 #------------------------------------INTERNET GATEWAY-------------------------------·#

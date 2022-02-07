@@ -10,9 +10,7 @@ variable "cidr_block" {}
 variable "subnets" {
 }
 
-variable "pub_a_subnets_id" {
 
-}
 
 #------------------------------------INTERNET GATEWAY-------------------------------·#
 
@@ -22,9 +20,6 @@ variable "igw_name" {
 
 #------------------------------------ROUTE TABLES------------------------------------#
 
-variable "rt_name" {
-  
-}
 
 variable "rt_cidr_block" {
     default = "0.0.0.0/0"
