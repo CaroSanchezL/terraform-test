@@ -40,4 +40,4 @@ nat_name = [ "nat-gw1", "nat-gw2" ]
 
 #------------------------------------ROUTE TABLES------------------------------------#
 
-rt_name = [ "rt_pub1", "rt_pub2" ]
+rt_name = [ "rt_pub", "rt_pri1", "rt_pri2" ]

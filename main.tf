@@ -83,17 +83,17 @@ resource "aws_nat_gateway" "nat_gateway" {
 
 resource "aws_route_table" "subnet_rt" {
   
-  count = 2
+  count = 3
 
   vpc_id = aws_vpc.main.id
 
   route {
     cidr_block = var.rt_cidr_block
-    gateway_id = aws_internet_gateway.igw.id
+    gateway_id = count.index == 1 ? aws_internet_gateway.igw.id : count.index == 2 ? aws_nat_gateway.nat_gateway[0].id : aws_nat_gateway.nat_gateway[1].id
   }
 
   tags = {
-    Name = "${count.index == 1 ? var.rt_name[0] : var.rt_name[1]}"
+    Name = "${count.index == 1 ? var.rt_name[0] : count.index == 1 ? var.rt_name[1] : var.rt_name[2]}"
   }
 }
 
@@ -105,7 +105,7 @@ resource "aws_route_table_association" "rt_association" {
 
   subnet_id = count.index == 1 ? aws_subnet.subnet[0].id : count.index == 2 ? aws_subnet.subnet[1].id : count.index == 3 ? aws_subnet.subnet[2].id : aws_subnet.subnet[3].id
 
-  route_table_id = count.index <= 2 ? aws_route_table.subnet_rt[0].id : aws_route_table.subnet_rt[1].id
+  route_table_id = count.index == 1 ? aws_route_table.subnet_rt[0].id : count.index == 2 ? aws_route_table.subnet_rt[1].id : count.index == 3 ? aws_route_table.subnet_rt[2].id : aws_route_table.subnet_rt[1].id
 
 }
 
