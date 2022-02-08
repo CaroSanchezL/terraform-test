@@ -30,26 +30,14 @@ subnets = [
     ]
 
 
+#-------------------------------------------EIP-----------------------------------------#
 
+eip_name = [ "eip_nat1", "eip_nat2" ]
 
-#------------------------------------INTERNET GATEWAY-------------------------------·#
+#------------------------------------NAT GATEWAY-------------------------------·#
 
-# #----------------------------------ALB---------------------------------------------#
+nat_name = [ "nat-gw1", "nat-gw2" ]
 
-#  "alb_name" {}
+#------------------------------------ROUTE TABLES------------------------------------#
 
-#  "internal" {
-#     default = "false"
-# }
-
-#  "load_balancer_type" {
-#     default = "application"
-# }
-
-# variable "alb_security_groups" {
-#   default = ["aws_security_group.${var.security_group_name}.id"]
-# }
-
-# variable "alb_subnets" {
-#     #default = COUNT?
-# }
+rt_name = [ "rt_pub1", "rt_pub2" ]
